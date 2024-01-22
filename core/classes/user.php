@@ -17,6 +17,19 @@ class User
         return $input;
     }
 
+    public function register($email, $screenName, $password)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`,`password`,`screenName`,`profileImage`, `profileCover`) 
+                                        VALUES (:email,:password,:screenName, 'assets/images/defaultProfileImage.png', 'assets/images/defaultCoverImage.png')");
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":screenName", $screenName, PDO::PARAM_STR);
+        $stmt->bindParam(":password",  md5($password), PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user_id = $this->pdo->lastInsertId();
+        $_SESSION['user_id'] = $user_id;
+    }
+
     public function login($email, $password)
     {
         $stmt = $this->pdo->prepare("SELECT `user_id` FROM `users` WHERE `email` = :email AND `password` = :password");
@@ -36,15 +49,6 @@ class User
         }
     }
 
-    public function userData($user_id)
-    {
-        $stmt = $this->pdo->prepare("SELECt * FROM users WHERE user_id = :user_id");
-        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_OBJ);
-    }
-
     public function logout()
     {
         $_SESSION = array();
@@ -52,6 +56,16 @@ class User
         header('Location: ../index.php');
         exit();
     }
+
+    public function userData($user_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
 
     public function create($table, $fields = array())
     {
@@ -64,10 +78,11 @@ class User
             }
             $stmt->execute();
             return $this->pdo->lastInsertId();
-        }        
+        }
     }
 
-    public function update($table, $user_id, $fields = array()) {
+    public function update($table, $user_id, $fields = array())
+    {
         $columns = '';
         $i = 1;
         foreach ($fields as $name => $value) {
@@ -79,7 +94,7 @@ class User
         }
         $sql = "UPDATE {$table} SET {$columns} WHERE `user_id` = {$user_id}";
         if ($stmt = $this->pdo->prepare($sql)) {
-            foreach($fields as $key => $value) {
+            foreach ($fields as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
             }
             $stmt->execute();
@@ -107,16 +122,11 @@ class User
         return $count > 0;
     }
 
-    public function register($email, $screenName, $password)
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`,`password`,`screenName`,`profileImage`, `profileCover`) 
-                                        VALUES (:email,:password,:screenName, 'assets/images/defaultProfileImage.png', 'assets/images/defaultCoverImage.png')");
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":screenName", $screenName, PDO::PARAM_STR);
-        $stmt->bindParam(":password",  md5($password), PDO::PARAM_STR);
+    public function userIdByUsername($username) {
+        $stmt = $this->pdo->prepare("SELECT user_id FROM users WHERE username = :username");
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->execute();
-
-        $user_id = $this->pdo->lastInsertId();
-        $_SESSION['user_id'] = $user_id;
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        return $user->user_id;
     }
 }

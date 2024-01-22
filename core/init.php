@@ -11,4 +11,4 @@ $getFromU = new User($pdo);
 $getFromT = new Tweet($pdo);
 $getFromF = new Follow($pdo);
 
-define("BASE_URL", "http://localhost/twitter/");
+define("BASE_URL", "http://twitter/");

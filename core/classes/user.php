@@ -53,7 +53,7 @@ class User
     {
         $_SESSION = array();
         session_destroy();
-        header('Location: ../index.php');
+        header('Location: '.BASE_URL.'/index.php');
         exit();
     }
 
@@ -128,5 +128,10 @@ class User
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_OBJ);
         return $user->user_id;
+    }
+
+    public function loggetIn(){
+       return isset($_SESSION['user_id']);
+        
     }
 }

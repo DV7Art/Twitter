@@ -23,7 +23,6 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>  	  
 
 </head>
-<!--Helvetica Neue-->
 
 <body>
     <div class="wrapper">
@@ -38,7 +37,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                             <li><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
 
                         </ul>
-                    </div><!-- nav left ends-->
+                    </div>
                     <div class="nav-right">
                         <ul>
                             <li><input type="text" placeholder="Search" class="search" /><i class="fa fa-search" aria-hidden="true"></i>
@@ -60,16 +59,15 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                             </li>
                             <li><label for="pop-up-tweet" class="addTweetBtn">Tweet</label></li>
                         </ul>
-                    </div><!-- nav right ends-->
+                    </div>
 
-                </div><!-- nav ends -->
-            </div><!-- nav container ends -->
-        </div><!-- header wrapper end -->
+                </div>
+            </div>
+        </div>
         <!--Profile cover-->
         <div class="profile-cover-wrap">
             <div class="profile-cover-inner">
-                <div class="profile-cover-img">
-                    <!-- PROFILE-COVER -->
+                <div class="profile-cover-img">                   
                     <img src="<?php echo BASE_URL . $profileData->profileCover ?>" />
                 </div>
             </div>
@@ -122,14 +120,13 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     </div>
                 </div>
             </div>
-        </div><!--Profile Cover End-->
+        </div>
 
         <!---Inner wrapper-->
         <div class="in-wrapper">
             <div class="in-full-wrap">
                 <div class="in-left">
-                    <div class="in-left-wrap">
-                        <!--PROFILE INFO WRAPPER END-->
+                    <div class="in-left-wrap">                        
                         <div class="profile-info-wrap">
                             <div class="profile-info-inner">
                                 <!-- PROFILE-IMAGE -->
@@ -214,27 +211,21 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                         </ul>
                                     </div>
                                 </div>
-
-                            </div>
-                            <!--PROFILE INFO INNER END-->
-
-                        </div>
-                        <!--PROFILE INFO WRAPPER END-->
-
+                            </div>                   
+                        </div>                       
                     </div>
-                    <!-- in left wrap-->
+                  
 
                 </div>
-                <!-- in left end-->
 
                 <div class="in-center">
                     <div class="in-center-wrap">
                         <!--Tweet SHOW WRAPER-->
                         <!--Tweet SHOW WRAPER END-->
-                    </div><!-- in left wrap-->
+                    </div>
                     <div class="popupTweet"></div>
                 </div>
-                <!-- in center end -->
+                
 
                 <div class="in-right">
                     <div class="in-right-wrap">
@@ -247,16 +238,11 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                         <!--Trends-->
                         <!--==TRENDS==-->
 
-                    </div><!-- in right wrap-->
+                    </div>
                 </div>
-                <!-- in right end -->
-
             </div>
-            <!--in full wrap end-->
         </div>
-        <!-- in wrappper ends-->
     </div>
-    <!-- ends wrapper -->
 </body>
 
 </html>

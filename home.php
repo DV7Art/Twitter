@@ -2,9 +2,10 @@
 include 'core/init.php';
 $user_id = $_SESSION['user_id'];
 $user = $getFromU->userData($user_id);
-//$getFromU->create('users', array('username' => 'marcusis'));
-//$getFromU->create('users', array('username' => 'marcusis','email'=>'marcus@gmail.com','password'=>md5('qwerty')))
-//$getFromU->update('users', $user_id, array('username' => 'danynew'))
+if($getFromU->loggetIn() === false) {
+    header("Location: index.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE HTML>

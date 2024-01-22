@@ -33,7 +33,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
 			</li>
 		</ul>
 		<?php
-		if (isset($error)) {
+		if (isset($error)) {			
 			echo '<li class="error-li"><div class="span-fp-error">' . $error . '</div></li>';
 		}
 		?>

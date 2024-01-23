@@ -2,9 +2,28 @@
 include 'core/init.php';
 $user_id = $_SESSION['user_id'];
 $user = $getFromU->userData($user_id);
-if($getFromU->loggetIn() === false) {
+if ($getFromU->loggetIn() === false) {
     header("Location: index.php");
     exit;
+}
+
+if (isset($_POST['tweet'])) {
+    $status = $getFromU->checkInput($_POST['status']);
+    $tweetImage = '';
+
+    if (!empty($status) || !empty($_FILES['file']['name'][0])) {
+        //если переменная $status не пуста или хотя бы одно имя файла в массиве $_FILES['file']['name'] не пусто
+        if (!empty($_FILES['file']['name'][0])) {
+            $tweetImage = $getFromU->uploadImage($_FILES['file']);
+        }
+
+        if (strlen($status) > 140) {
+            $error = "The text of your tweet is too long";
+        }
+        $getFromU->create('tweets', array('status' => $status, 'tweetBy' => $user_id, 'tweetImage' => $tweetImage, 'postedOn' => date('Y-m-d H:i:s')));
+    } else {
+        $error = "Type or choose image to tweet";
+    }
 }
 ?>
 
@@ -66,7 +85,8 @@ if($getFromU->loggetIn() === false) {
             </div>
 
         </div>
-<script src="assets/js/search.js"></script>
+        <script src="assets/js/search.js"></script>
+        <script src="assets/js/hashtag.js"></script>
         <!---Inner wrapper-->
 
         <div class="inner-wrapper">
@@ -141,7 +161,7 @@ if($getFromU->loggetIn() === false) {
                                     </div>
                                     <div class="tweet-body">
                                         <form method="post" enctype="multipart/form-data">
-                                            <textarea class="status" name="status" placeholder="Type Something here!" rows="4" cols="50"></textarea>
+                                            <textarea class="status" name="status" placeholder="Type Something here!" rows="4" cols="50" maxlength="140"></textarea>
                                             <div class="hash-box">
                                                 <ul>
                                                 </ul>
@@ -152,7 +172,11 @@ if($getFromU->loggetIn() === false) {
                                             <ul>
                                                 <input type="file" name="file" id="file" />
                                                 <li><label for="file"><i class="fa fa-camera" aria-hidden="true"></i></label>
-                                                    <span class="tweet-error"></span>
+                                                    <span class="tweet-error"><? if (isset($error)) {
+                                                                                    echo $error;
+                                                                                } elseif (isset($imageError)) {
+                                                                                    echo $imageError;
+                                                                                } ?></span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -167,7 +191,7 @@ if($getFromU->loggetIn() === false) {
 
                             <!--Tweet SHOW WRAPPER-->
                             <div class="tweets">
-
+                                <? $getFromT->tweets() ?>
                             </div>
 
                             <!--TWEETS SHOW WRAPPER-->

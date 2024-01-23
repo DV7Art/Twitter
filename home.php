@@ -66,7 +66,7 @@ if($getFromU->loggetIn() === false) {
             </div>
 
         </div>
-
+<script src="assets/js/search.js"></script>
         <!---Inner wrapper-->
 
         <div class="inner-wrapper">

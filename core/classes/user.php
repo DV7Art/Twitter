@@ -17,6 +17,15 @@ class User
         return $input;
     }
 
+    public function search($search)
+    {
+        $stmt = $this->pdo->prepare("SELECT user_id, username, screenName, profileImage, profileCover FROM users WHERE username LIKE ?  OR screenName LIKE ?");
+        $stmt->bindValue(1, $search . '%', PDO::PARAM_STR);
+        $stmt->bindValue(2, $search . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function register($email, $screenName, $password)
     {
         $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`,`password`,`screenName`,`profileImage`, `profileCover`) 
@@ -160,10 +169,10 @@ class User
         if (in_array($ext, $allowed_ext)) {
             if ($error === 0) {
                 if ($fileSize <= 209_272_152) {
-                  $fileRoot = 'users/'.$fileName;
-                  move_uploaded_file($fileTemp,$fileRoot);
-                  return $fileRoot;
-                }else{
+                    $fileRoot = 'users/' . $fileName;
+                    move_uploaded_file($fileTemp, $fileRoot);
+                    return $fileRoot;
+                } else {
                     $GLOBALS['imageError'] = "The file size is too large!";
                 }
             }

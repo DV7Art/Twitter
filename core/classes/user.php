@@ -53,7 +53,7 @@ class User
     {
         $_SESSION = array();
         session_destroy();
-        header('Location: '.BASE_URL.'/index.php');
+        header('Location: ' . BASE_URL . '/index.php');
         exit();
     }
 
@@ -122,7 +122,8 @@ class User
         return $count > 0;
     }
 
-    public function userIdByUsername($username) {
+    public function userIdByUsername($username)
+    {
         $stmt = $this->pdo->prepare("SELECT user_id FROM users WHERE username = :username");
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->execute();
@@ -130,8 +131,33 @@ class User
         return $user->user_id;
     }
 
-    public function loggetIn(){
-       return isset($_SESSION['user_id']);
-        
+    public function loggetIn()
+    {
+        return isset($_SESSION['user_id']);
+    }
+
+    public function uploadImage($file)
+    {
+        $fileName = basename($file['name']);
+        $fileTemp = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $error = $file['error'];
+
+        $ext = explode('.', $fileName);
+        $ext = strtolower(end($ext));
+        $allowed_ext = array('jpg', 'png', 'jpeg');
+        if (in_array($ext, $allowed_ext)) {
+            if ($error === 0) {
+                if ($fileSize <= 209_272_152) {
+                  $fileRoot = 'users/'.$fileName;
+                  move_uploaded_file($fileTemp,$fileRoot);
+                  return $fileRoot;
+                }else{
+                    $GLOBALS['imageError'] = "The file size is too large!";
+                }
+            }
+        } else {
+            $GLOBALS['imageError'] = "The extension is not allowed!";
+        }
     }
 }

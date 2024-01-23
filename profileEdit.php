@@ -30,6 +30,23 @@ if (isset($_POST['screenName'])) {
         $error = "Name filled can't be blink";
     }
 }
+
+if (isset($_FILES['profileImage'])) {
+    //чи існує хочаб один файл
+    if (!empty($_FILES['profileImage']['name'][0])) {
+        $fileRoot = $getFromU->uploadImage($_FILES['profileImage']);
+        $getFromU->update('users', $user_id, array('profileImage' => $fileRoot));
+        header("Location:" .$user->username);
+    }
+}
+if (isset($_FILES['profileCover'])) {
+    //чи існує хочаб один файл
+    if (!empty($_FILES['profileCover']['name'][0])) {
+        $fileRoot = $getFromU->uploadImage($_FILES['profileCover']);
+        $getFromU->update('users', $user_id, array('profileCover' => $fileRoot));
+        header("Location:" .$user->username);
+    }
+}
 ?>
 <!doctype html>
 <html>
@@ -107,7 +124,7 @@ if (isset($_POST['screenName'])) {
                                             <label for="file-up">
                                                 Upload photo
                                             </label>
-                                            <input type="file" name="profileCover" id="file-up" />
+                                            <input type="file" name="profileCover" onchange="this.form.submit()" id="file-up" />
                                         </li>
                                         <li>
                                             <label for="cover-upload-btn">
@@ -168,7 +185,7 @@ if (isset($_POST['screenName'])) {
                     </ul>
                     <div class="edit-button">
                         <span>
-                            <button class="f-btn" type="button" value="Cancel">Cancel</button>
+                            <button class="f-btn" type="button" onclick="window.location.href='<?php echo $user->username?>'" value="Cancel">Cancel</button>
                         </span>
                         <span>
                             <input type="submit" id="save" value="Save Changes">
@@ -206,7 +223,7 @@ if (isset($_POST['screenName'])) {
                                                             <label for="profileImage">
                                                                 Upload photo
                                                             </label>
-                                                            <input id="profileImage" type="file" name="profileImage" />
+                                                            <input id="profileImage" type="file" onchange="this.form.submit()" name="profileImage" />
 
                                                         </li>
                                                         <li><a href="#">Remove</a></li>
@@ -225,6 +242,15 @@ if (isset($_POST['screenName'])) {
 
                                 <form id="editForm" method="post" enctype="multipart/Form-data">
                                     <div class="profile-name-wrap">
+                                        <?php
+                                        if (isset($imageError)) {
+                                            echo    '<ul>
+                                                        <li class="error-li">
+                                                            <div class="span-pe-error">' . $imageError . '</div>
+                                                        </li>
+                                                    </ul>';
+                                        }
+                                        ?>
                                         <div class="profile-name">
                                             <input type="text" name="screenName" value="<?php echo $user->screenName ?>" />
                                         </div>
@@ -254,6 +280,13 @@ if (isset($_POST['screenName'])) {
                                                         <input type="text" name="website" placeholder="Website" value="<?php echo $user->website ?>" />
                                                     </div>
                                                 </li>
+                                                <?php
+                                                if (isset($error)) {
+                                                    echo '<li class="error-li">
+                                                            <div class="span-pe-error">' . $error . '</div>
+                                                        </li>';
+                                                }
+                                                ?>
                                 </form>
                                 <script type="text/javascript">
                                     $('#save').click(function() {

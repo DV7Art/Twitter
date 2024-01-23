@@ -20,7 +20,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="assets/css/style-complete.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>  	  
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -33,9 +33,10 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     <div class="nav-left">
                         <ul>
                             <li><a href="<?php echo BASE_URL ?>home.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-                            <li><a href="<?php echo BASE_URL ?>i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
-                            <li><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
-
+                            <?php if ($getFromU->loggetIn()) { ?>
+                                <li><a href="<?php echo BASE_URL ?>i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
+                            <? } ?>
                         </ul>
                     </div>
                     <div class="nav-right">
@@ -44,20 +45,23 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                 <div class="search-result">
                                 </div>
                             </li>
-
-                            <li class="hover"><label class="drop-label" for="drop-wrap1"><img src="<?php echo BASE_URL . $user->profileImage ?>" /></label>
-                                <input type="checkbox" id="drop-wrap1">
-                                <div class="drop-wrap">
-                                    <div class="drop-inner">
-                                        <ul>
-                                            <li><a href="<?php echo BASE_URL . $user->username ?>"><?php echo $user->username ?></a></li>
-                                            <li><a href="<?php echo BASE_URL ?>settings/account">Settings</a></li>
-                                            <li><a href="<?php echo BASE_URL ?>includes/logout.php">Log out</a></li>
-                                        </ul>
+                            <?php if ($getFromU->loggetIn()) { ?>
+                                <li class="hover"><label class="drop-label" for="drop-wrap1"><img src="<?php echo BASE_URL . $user->profileImage ?>" /></label>
+                                    <input type="checkbox" id="drop-wrap1">
+                                    <div class="drop-wrap">
+                                        <div class="drop-inner">
+                                            <ul>
+                                                <li><a href="<?php echo BASE_URL . $user->username ?>"><?php echo $user->username ?></a></li>
+                                                <li><a href="<?php echo BASE_URL ?>settings/account">Settings</a></li>
+                                                <li><a href="<?php echo BASE_URL ?>includes/logout.php">Log out</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li><label for="pop-up-tweet" class="addTweetBtn">Tweet</label></li>
+                                </li>
+                                <li><label for="pop-up-tweet" class="addTweetBtn">Tweet</label></li>
+                            <? }else {
+                                echo '<li><a href="'.BASE_URL.'index.php">Have an account? Log in!</a> </li>';
+                            } ?>
                         </ul>
                     </div>
 
@@ -67,7 +71,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
         <!--Profile cover-->
         <div class="profile-cover-wrap">
             <div class="profile-cover-inner">
-                <div class="profile-cover-img">                   
+                <div class="profile-cover-img">
                     <img src="<?php echo BASE_URL . $profileData->profileCover ?>" />
                 </div>
             </div>
@@ -126,7 +130,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
         <div class="in-wrapper">
             <div class="in-full-wrap">
                 <div class="in-left">
-                    <div class="in-left-wrap">                        
+                    <div class="in-left-wrap">
                         <div class="profile-info-wrap">
                             <div class="profile-info-inner">
                                 <!-- PROFILE-IMAGE -->
@@ -211,10 +215,10 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>                   
-                        </div>                       
+                            </div>
+                        </div>
                     </div>
-                  
+
 
                 </div>
 
@@ -225,7 +229,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     </div>
                     <div class="popupTweet"></div>
                 </div>
-                
+
 
                 <div class="in-right">
                     <div class="in-right-wrap">

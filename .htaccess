@@ -1,7 +1,8 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([a-zA-Z0-9_-]+)/?$ profile.php?username=$1 [QSA,L]
-
+RewriteRule ^settings/account/?$ account.php
+RewriteRule ^settings/password/?$ password.php
 
 # RewriteEngine On: Увімкне модуль mod_rewrite для обробки правил перезапису.
 

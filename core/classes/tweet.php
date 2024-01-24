@@ -68,7 +68,7 @@ class Tweet extends User
                                             </div>
                                         </div>
                                 </div>' : '
-                                                <div class="t-show-popup">
+                                                <div class="t-show-popup" data-tweet="'.$tweet->tweetID.'">
                                                     <div class="t-show-head">
                                                         <div class="t-show-img">
                                                             <img src="' . $tweet->profileImage . '"/>
@@ -230,4 +230,6 @@ class Tweet extends User
         return $stmt->fetch(PDO::FETCH_ASSOC);
         //результат запиту як асоціативний масив в PHP.
     }
+
+    
 }

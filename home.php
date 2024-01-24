@@ -195,7 +195,7 @@ if (isset($_POST['tweet'])) {
 
                             <!--Tweet SHOW WRAPPER-->
                             <div class="tweets">
-                                <? $getFromT->tweets() ?>
+                                <? $getFromT->tweets($user_id) ?>
                             </div>
 
                             <!--TWEETS SHOW WRAPPER-->
@@ -203,7 +203,7 @@ if (isset($_POST['tweet'])) {
                                 <img id="loader" src="assets/images/loading.svg" style="display: none;" />
                             </div>
                             <div class="popupTweet"></div>
-
+                            <script src="assets/js/like.js"></script>
 
                         </div><!-- in left wrap-->
                     </div>

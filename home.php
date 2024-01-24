@@ -25,6 +25,9 @@ if (isset($_POST['tweet'])) {
         if (!empty($hashtag)) {
             $getFromT->addTrend($status);
         }
+        //fix: refresh of the page the last tweet tweets again.
+        header("Location:home.php");
+        exit;
     } else {
         $error = "Type or choose image to tweet";
     }

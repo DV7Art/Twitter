@@ -1,7 +1,14 @@
 <?php
 include "../init.php";
+$user_id = $_SESSION['user_id'];
+if (isset($_POST['retweet']) && !empty($_POST['retweet'])) {
+    $tweet_id = $_POST['retweet'];
+    $get_id = $_POST['user_id'];
+    $comment = $getFromU->checkInput($_POST['comment']);
+    $getFromT->retweet($tweet_id, $user_id, $get_id,$comment);
+}
+
 if (isset($_POST['showPopup']) && !empty($_POST['showPopup'])) {
-    $user_id = $_SESSION['user_id'];
     $tweet_id = $_POST['showPopup'];
     $get_id = $_POST['user_id'];
     $tweet = $getFromT->getPopupTweet($tweet_id);
@@ -29,7 +36,7 @@ if (isset($_POST['showPopup']) && !empty($_POST['showPopup'])) {
                                     <a><? echo $tweet->screenName ?> </a><span>‏@<? echo $tweet->username ?> - <? echo $tweet->postedOn ?></span>
                                 </div>
                                 <div class="retweet-popup-comment-body">
-                                <? echo $tweet->status ?> - <? echo $tweet->tweetImage ?>
+                                    <? echo $tweet->status ?> - <? echo $tweet->tweetImage ?>
                                 </div>
                             </div>
                         </div>

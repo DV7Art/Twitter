@@ -7,6 +7,7 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
     $tweet = $getFromT->getPopupTweet($tweetID);
     $likes = $getFromT->likes($user_id, $tweetID);
     $retweet = $getFromT->checkRetweet($tweetID, $user_id);
+    $comments = $getFromT->comments($tweetID);
 ?>
     <div class="tweet-show-popup-wrap">
         <input type="checkbox" id="tweet-show-popup-wrap">
@@ -113,7 +114,7 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                                 <img src="<? echo BASE_URL . $user->profileImage ?>" />
                             </div>
                             <div class="tweet-show-popup-footer-input-right">
-                                <input id="commentField" type="text" name="comment" placeholder="Reply to @username">
+                                <input id="commentField" type="text" data-tweet="<? echo $tweet->tweetID?>" name="comment" placeholder="Reply to @<? echo $tweet->username ?>">
                             </div>
                         </div>
                         <div class="tweet-footer">
@@ -129,6 +130,7 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                             </div>
                             <div class="t-fo-right">
                                 <input type="submit" id="postComment">
+                                <script src="<? echo BASE_URL;?>assets/js/comment.js"></script>
                             </div>
                         </div>
                     </div><!--tweet-show-popup-footer-input-wrap end-->
@@ -136,6 +138,47 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                 <div class="tweet-show-popup-comment-wrap">
                     <div id="comments">
                         <!--COMMENTS-->
+                        <? foreach ($comments as $comment) {
+                            echo '
+                            <div class="tweet-show-popup-comment-box">
+                                <div class="tweet-show-popup-comment-inner">
+                                    <div class="tweet-show-popup-comment-head">
+                                        <div class="tweet-show-popup-comment-head-left">
+                                            <div class="tweet-show-popup-comment-img">
+                                                <img src="' . BASE_URL . $comment->profileImage . '">
+                                            </div>
+                                        </div>
+                                        <div class="tweet-show-popup-comment-head-right">
+                                            <div class="tweet-show-popup-comment-name-box">
+                                                <div class="tweet-show-popup-comment-name-box-name"> 
+                                                    <a href="' . BASE_URL . $comment->username . '">' . $comment->screenName . '</a>
+                                                </div>
+                                                <div class="tweet-show-popup-comment-name-box-tname">
+                                                    <a href="' . BASE_URL . $comment->username . '">@' . $comment->username . ' - ' . $comment->commentAt . '</a>
+                                                </div>
+                                            </div>
+                                            <div class="tweet-show-popup-comment-right-tweet">
+                                                    <p><a href="' . BASE_URL . $tweet->username . '">@' . $tweet->username . '</a> ' . $comment->comment . '</p>
+                                            </div>
+                                            <div class="tweet-show-popup-footer-menu">
+                                                <ul>
+                                                    <li><button><i class="fa fa-share" aria-hidden="true"></i></button></li>
+                                                    <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                    <li>
+                                                    <a href="#" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                                    <ul> 
+                                                    <li><label class="deleteTweet">Delete Tweet</label></li>
+                                                    </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--TWEET SHOW POPUP COMMENT inner END-->
+                            </div>
+                            ';
+                        } ?>
                     </div>
 
                 </div>

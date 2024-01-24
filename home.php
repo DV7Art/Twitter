@@ -204,6 +204,7 @@ if (isset($_POST['tweet'])) {
                             </div>
                             <div class="popupTweet"></div>
                             <script src="assets/js/like.js"></script>
+                            <script src="assets/js/retweet.js"></script>
 
                         </div><!-- in left wrap-->
                     </div>

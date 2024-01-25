@@ -32,6 +32,7 @@ class Tweet extends User
                                 ' : '') . '
 
                                 ' . ((isset($retweet['tweetID']) ? !empty($tweet->retweetMsg) && $tweet->tweetID === $retweet['tweetID'] or $tweet->retweetID > 0 : '') ? '
+                                        <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">        
                                         <div class="t-show-head">
                                         <div class="t-show-img">
                                             <img src="' . BASE_URL . $user->profileImage . '"/>
@@ -53,7 +54,7 @@ class Tweet extends User
 
                                             ' . ((!empty($tweet->tweetImage)) ? '
                                                 <div class="retweet-t-s-b-inner-left">
-                                                    <img src="' . BASE_URL . $tweet->tweetImage . '"/>  
+                                                    <img src="' . BASE_URL . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '" class="imagePopup"/>  
                                                 </div>' : '') . '
                                                 <div class="retweet-t-s-b-inner-right">
                                                     <div class="t-h-c-name">
@@ -67,8 +68,9 @@ class Tweet extends User
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>' : '
-                                                <div class="t-show-popup" data-tweet="'.$tweet->tweetID.'">
+                                                <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">
                                                     <div class="t-show-head">
                                                         <div class="t-show-img">
                                                             <img src="' . $tweet->profileImage . '"/>
@@ -89,7 +91,7 @@ class Tweet extends User
                                                             <div class="t-show-body">
                                                             <div class="t-s-b-inner">
                                                             <div class="t-s-b-inner-in">
-                                                                <img src="' . $tweet->tweetImage . '" class="imagePopup"/>
+                                                                <img src="' . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '" class="imagePopup"/>
                                                             </div>
                                                             </div>
                                                             </div>
@@ -231,7 +233,8 @@ class Tweet extends User
         //результат запиту як асоціативний масив в PHP.
     }
 
-    public function comments($tweet_id){
+    public function comments($tweet_id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM comments LEFT JOIN users ON commentBy = user_id WHERE commentOn = :tweet_id");
         $stmt->bindParam(':tweet_id', $tweet_id, PDO::PARAM_INT);
         $stmt->execute();

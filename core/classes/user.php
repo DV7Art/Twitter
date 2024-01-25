@@ -123,7 +123,7 @@ class User
             foreach ($array as $name => $value) {
                 $stmt->bindValue(':' . $name, $value);
             }
-            $stmt->execute(); 
+            $stmt->execute();
         }
     }
 
@@ -187,7 +187,7 @@ class User
             if ($error === 0) {
                 if ($fileSize <= 209_272_152) {
                     $fileRoot = 'users/' . $fileName;
-                    move_uploaded_file($fileTemp, $fileRoot);
+                    move_uploaded_file($fileTemp, $_SERVER['DOCUMENT_ROOT'] .'/'. $fileRoot);
                     return $fileRoot;
                 } else {
                     $GLOBALS['imageError'] = "The file size is too large!";

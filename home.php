@@ -127,7 +127,7 @@ if (isset($_POST['tweet'])) {
                                                 <div class="num-head">
                                                     TWEETS
                                                 </div>
-                                                <div class="num-body"> 10 </div>
+                                                <div class="num-body"> <? $getFromT->countTweets($user_id)?> </div>
                                             </div>
                                             <div class="num-box">
                                                 <div class="num-head">

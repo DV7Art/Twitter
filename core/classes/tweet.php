@@ -242,4 +242,21 @@ class Tweet extends User
 
         return $stmt->fetchALL(PDO::FETCH_OBJ);
     }
+
+    public function countTweets($user_id){
+        $stmt = $this->pdo->prepare("SELECT COUNT(tweetID) AS totalTweets FROM tweets WHERE tweetBy = :user_id AND retweetID = '0' OR retweetBy = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $count = $stmt->fetch(PDO::FETCH_OBJ);
+
+        echo $count->totalTweets;
+    }
+
+    public function countLikes($user_id) {
+        $stmt = $this->pdo->prepare("SELECT COUNT(likeID) AS totalLikes FROM likes WHERE likeBy = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $count = $stmt->fetch(PDO::FETCH_OBJ);
+        echo $count->totalLikes;
+    }
 }

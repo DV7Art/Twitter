@@ -59,8 +59,8 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                     </div>
                                 </li>
                                 <li><label for="pop-up-tweet" class="addTweetBtn">Tweet</label></li>
-                            <? }else {
-                                echo '<li><a href="'.BASE_URL.'index.php">Have an account? Log in!</a> </li>';
+                            <? } else {
+                                echo '<li><a href="' . BASE_URL . 'index.php">Have an account? Log in!</a> </li>';
                             } ?>
                         </ul>
                     </div>
@@ -83,7 +83,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                 TWEETS
                             </div>
                             <div class="n-bottom">
-                                0
+                                <? $getFromT->countTweets($user_id) ?>
                             </div>
                         </li>
                         <li>
@@ -112,7 +112,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                     LIKES
                                 </div>
                                 <div class="n-bottom">
-                                    0
+                                    <? $getFromT->countLikes($user_id) ?>
                                 </div>
                             </a>
                         </li>

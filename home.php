@@ -209,6 +209,7 @@ if (isset($_POST['tweet'])) {
                             <script src="assets/js/like.js"></script>
                             <script src="assets/js/retweet.js"></script>
                             <script src="assets/js/popup.js"></script>
+                            <script src="assets/js/delete.js"></script>
 
                         </div><!-- in left wrap-->
                     </div>

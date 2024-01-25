@@ -114,7 +114,7 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                                 <img src="<? echo BASE_URL . $user->profileImage ?>" />
                             </div>
                             <div class="tweet-show-popup-footer-input-right">
-                                <input id="commentField" type="text" data-tweet="<? echo $tweet->tweetID?>" name="comment" placeholder="Reply to @<? echo $tweet->username ?>">
+                                <input id="commentField" type="text" data-tweet="<? echo $tweet->tweetID ?>" name="comment" placeholder="Reply to @<? echo $tweet->username ?>">
                             </div>
                         </div>
                         <div class="tweet-footer">
@@ -130,7 +130,7 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                             </div>
                             <div class="t-fo-right">
                                 <input type="submit" id="postComment">
-                                <script src="<? echo BASE_URL;?>assets/js/comment.js"></script>
+                                <script src="<? echo BASE_URL; ?>assets/js/comment.js"></script>
                             </div>
                         </div>
                     </div><!--tweet-show-popup-footer-input-wrap end-->
@@ -164,12 +164,13 @@ if (isset($_POST['showpopup']) && !empty($_POST['showpopup'])) {
                                                 <ul>
                                                     <li><button><i class="fa fa-share" aria-hidden="true"></i></button></li>
                                                     <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                    '.(($comment->commentBy === $user_id) ? '
                                                     <li>
                                                     <a href="#" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                                                     <ul> 
-                                                    <li><label class="deleteTweet">Delete Tweet</label></li>
+                                                    <li><label class="deleteComment" data-tweet="' . $tweet->tweetID . '" data-comment="' . $comment->commentID . '">Delete Tweet</label></li>
                                                     </ul>
-                                                    </li>
+                                                    </li>' : '').'
                                                 </ul>
                                             </div>
                                         </div>

@@ -187,7 +187,7 @@ class User
             if ($error === 0) {
                 if ($fileSize <= 209_272_152) {
                     $fileRoot = 'users/' . $fileName;
-                    move_uploaded_file($fileTemp, $_SERVER['DOCUMENT_ROOT'] .'/'. $fileRoot);
+                    move_uploaded_file($fileTemp, $_SERVER['DOCUMENT_ROOT'] . '/' . $fileRoot);
                     return $fileRoot;
                 } else {
                     $GLOBALS['imageError'] = "The file size is too large!";
@@ -195,6 +195,30 @@ class User
             }
         } else {
             $GLOBALS['imageError'] = "The extension is not allowed!";
+        }
+    }
+
+    public function timeAgo($datetime)
+    {
+        $time = strtotime($datetime);
+        $current = time();
+        $seconds = $current - $time;
+        $minutes = round($seconds / 60);
+        $hours = round($seconds / 3600);
+        $months = round($seconds / 2600640);
+
+        if ($seconds <= 60) {
+            if ($seconds == 0) {
+                return 'now';
+            }
+        } else if ($minutes <= 60) {
+            return $minutes . "m";
+        } else if($hours <= 24){
+            return $hours."h";
+        }else if($months <= 12){
+            return date('M j', $time);
+        } else {
+            return date('j M Y', $time);
         }
     }
 }

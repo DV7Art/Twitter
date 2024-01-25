@@ -6,11 +6,12 @@ class Tweet extends User
         $this->pdo = $pdo;
     }
 
-    public function tweets($user_id)
+    public function tweets($user_id, $num)
     {
         //$stmt = $this->pdo->prepare("SELECT * FROM tweets, users WHERE tweetBy = user_id");
-        $stmt = $this->pdo->prepare("SELECT * FROM tweets LEFT JOIN users ON tweetBy = user_id WHERE tweetBy = :user_id AND retweetID = '0' OR tweetBy = :user_id AND retweetBy != :user_id");
+        $stmt = $this->pdo->prepare("SELECT * FROM tweets LEFT JOIN users ON tweetBy = user_id WHERE tweetBy = :user_id AND retweetID = '0' OR tweetBy = :user_id AND retweetBy != :user_id LIMIT :num");
         $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(":num", $num, PDO::PARAM_INT);
         $stmt->execute();
         $tweets = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -20,102 +21,105 @@ class Tweet extends User
             $user = $this->userData($tweet->retweetBy);
 
             echo '<div class="all-tweet">
-                        <div class="t-show-wrap">   
-                            <div class="t-show-inner">                            
-                                 
-                                 ' . ((isset($retweet['retweetID']) ? !empty($tweet->retweetMsg) && $tweet->retweetID === $retweet['retweetID'] or $tweet->retweetID > 0 : '') ? '
-                                <div class="t-show-banner">
-                                    <div class="t-show-banner-inner">
-                                        <span><i class="fa fa-retweet" aria-hidden="true"></i></span><span>' . $user->screenName . ' Retweeted</span>
+                     <div class="t-show-wrap">   
+                        <div class="t-show-inner">  
+                        '.((!empty($retweet['retweetID']) ? $retweet['retweetID'] === $tweet->retweetID OR $tweet->retweetID > 0 : '') ? '                
+                        
+                            <div class="t-show-banner">
+                                <div class="t-show-banner-inner">
+                                    <span><i class="fa fa-retweet" aria-hidden="true"></i></span><span>' . $user->screenName . ' Retweeted</span>
+                                </div>
+                            </div>' : '') . '
+                            
+                            '.((!empty($tweet->retweetMsg) && $tweet->tweetID === isset($retweet['tweetID']) or $tweet->retweetID > 0) ? '<div class="t-show-head">
+                            <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">        
+                                <div class="t-show-head">
+                                    <div class="t-show-img">
+                                        <img src="' . BASE_URL . $user->profileImage . '"/>
+                                    </div>
+                                    <div class="t-s-head-content">
+                                        <div class="t-h-c-name">
+                                            <span><a href="' . BASE_URL . $user->username . '">' . $user->screenName . '</a></span>
+                                            <span>@' . $user->username . '</span>
+                                            <span>'.$this->timeAgo($tweet->postedOn).'</span>
+                                        </div>
+                                        <div class="t-h-c-dis">
+                                            ' . $this->getTweetLinks($tweet->retweetMsg) . '
+                                        </div>
                                     </div>
                                 </div>
-                                ' : '') . '
-
-                                ' . ((isset($retweet['tweetID']) ? !empty($tweet->retweetMsg) && $tweet->tweetID === $retweet['tweetID'] or $tweet->retweetID > 0 : '') ? '
-                                        <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">        
-                                        <div class="t-show-head">
-                                        <div class="t-show-img">
-                                            <img src="' . BASE_URL . $user->profileImage . '"/>
-                                        </div>
-                                        <div class="t-s-head-content">
-                                            <div class="t-h-c-name">
-                                                <span><a href="' . BASE_URL . $user->username . '">' . $user->screenName . '</a></span>
-                                                <span>@' . $user->username . '</span>
-                                                <span>' . $retweet['postedOn'] . '</span>
-                                            </div>
-                                            <div class="t-h-c-dis">
-                                                ' . $this->getTweetLinks($tweet->retweetMsg) . '
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="t-s-b-inner">
-                                        <div class="t-s-b-inner-in">
-                                            <div class="retweet-t-s-b-inner">
-
-                                            ' . ((!empty($tweet->tweetImage)) ? '
-                                                <div class="retweet-t-s-b-inner-left">
-                                                    <img src="' . BASE_URL . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '" class="imagePopup"/>  
-                                                </div>' : '') . '
-                                                <div class="retweet-t-s-b-inner-right">
-                                                    <div class="t-h-c-name">
-                                                        <span><a href="' . BASE_URL . $tweet->username . '">' . $tweet->screenName . '</a></span>
-                                                        <span>@' . $tweet->username . '</span>
-                                                        <span>' . $tweet->postedOn . '</span>
-                                                    </div>
-                                                    <div class="retweet-t-s-b-inner-right-text">        
-                                                    ' . $tweet->status . '
-                                                    </div>
+                                <div class="t-s-b-inner">
+                                    <div class="t-s-b-inner-in">
+                                        <div class="retweet-t-s-b-inner">
+                                         ' . ((!empty($tweet->tweetImage)) ? '
+                                            <div class="retweet-t-s-b-inner-left">
+                                                <img src="' . BASE_URL . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '" class="imagePopup"/>  
+                                            </div>' : '') . '
+                                            <div>
+                                                <div class="t-h-c-name">
+                                                    <span><a href="' . BASE_URL . $tweet->username . '">' . $tweet->screenName . '</a></span>
+                                                    <span>@' . $tweet->username . '</span>
+                                                    <span>' . $this->timeAgo($tweet->postedOn) . '</span>
+                                                </div>
+                                                <div class="retweet-t-s-b-inner-right-text">        
+                                                    ' . $this->getTweetLinks($tweet->status) . '
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>' : '
-                                                <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">
-                                                    <div class="t-show-head">
-                                                        <div class="t-show-img">
-                                                            <img src="' . $tweet->profileImage . '"/>
-                                                        </div>
-                                                        <div class="t-s-head-content">
-                                                            <div class="t-h-c-name">
-                                                                <span><a href="' . $tweet->username . '">' . $tweet->screenName . '</a></span>
-                                                                <span>@' . $tweet->username . '</span>
-                                                                <span>' . $tweet->postedOn . '</span>
-                                                            </div>
-                                                            <div class="t-h-c-dis">
-                                                            ' . $this->getTweetLinks($tweet->status) . '
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    ' . ((!empty($tweet->tweetImage)) ? '
-                                                        <!--tweet show head end-->
-                                                            <div class="t-show-body">
-                                                            <div class="t-s-b-inner">
-                                                            <div class="t-s-b-inner-in">
-                                                                <img src="' . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '" class="imagePopup"/>
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                            <!--tweet show body end-->' : '') . '                
-                                </div>') . '
-                                <div class="t-show-footer">
-                                    <div class="t-s-f-right">
-                                        <ul> 
-                                            <li><button><a href="#"><i class="fa fa-share" aria-hidden="true"></i></a></button></li>    
-                                            <li>' . (($tweet->tweetID ?? '' === $retweet['retweetID']) ? '<button class="retweeted" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . $tweet->retweetCount . '</span></button>' : '<button class="retweet" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>') . '</li>
-                                            <li>' . (($likes['likeOn'] ?? '' === $tweet->tweetID) ? '<button class="unlike-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart" aria-hidden="true"></i><span class="likesCounter">' . $tweet->likesCount . '</span></button>' : '<button class="like-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart-o" aria-hidden="true"></i><span class="likesCounter">' . (($tweet->likesCount > 0) ? $tweet->likesCount : '') . '</span></button>') . '</li>
-                                            '.(($tweet->tweetBy === $user_id) ? '
-                                            <li>
-                                                <a href="#" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                                                <ul> 
-                                                <li><label class="deleteTweet" data-tweet="' . $tweet->tweetID . '">Delete Tweet</label></li>
-                                                </ul>
-                                            </li>' : '').'
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
+                            </div>' : '
+
+                                <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">
+                                    <div class="t-show-head">
+                                        <div class="t-show-img">
+                                            <img src="' . BASE_URL . $tweet->profileImage . '"/>
+                                        </div>
+                                            <div class="t-s-head-content">
+                                                <div class="t-h-c-name">
+                                                    <span><a href="' . $tweet->username . '">' . $tweet->screenName . '</a></span>
+                                                    <span>@' . $tweet->username . '</span>
+                                                    <span>' . $this->timeAgo($tweet->postedOn) . '</span>
+                                                </div>
+                                                <div class="t-h-c-dis">
+                                                    ' . $this->getTweetLinks($tweet->status) . '
+                                                </div>
+                                            </div>
+                                        </div>' .
+                                        ((!empty($tweet->tweetImage)) ? '
+                                            <!--tweet show head end-->
+                                                <div class="t-show-body">
+                                                <div class="t-s-b-inner">
+                                                <div class="t-s-b-inner-in">
+                                                    <img src="' . $tweet->tweetImage . '" data-tweet="' . $tweet->tweetID . '"/>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <!--tweet show body end-->' : '') . '                
+                    </div>') . '
+                    <div class="t-show-footer">
+                        <div class="t-s-f-right">
+                            <ul> 
+                                <li><button><a href="#"><i class="fa fa-share" aria-hidden="true"></i></a></button></li>    
+                                <li>'.((!empty($retweet['retweetID']) ? $tweet->tweetID === $retweet['retweetID'] : '') ?  '
+                                    <button class="retweeted" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . $tweet->retweetCount . '</span></button>' : '
+                                    <button class="retweet" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>') . '</li>
+                                    <li>'.((!empty($likes['likeOn']) ? $likes['likeOn'] === $tweet->tweetID : '') ?  '
+                                    <button class="unlike-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart" aria-hidden="true"></i><span class="likesCounter">' . $tweet->likesCount . '</span></button>' : '
+                                    <button class="like-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart-o" aria-hidden="true"></i><span class="likesCounter">' . (($tweet->likesCount > 0) ? $tweet->likesCount : '') . '</span></button>') . '</li>
+                                ' . (($tweet->tweetBy === $user_id) ? '
+                                <li>
+                                    <a href="#" class="more"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                                    <ul> 
+                                    <li><label class="deleteTweet" data-tweet="' . $tweet->tweetID . '">Delete Tweet</label></li>
+                                    </ul>
+                                </li>' : '') . '
+                            </ul>
                         </div>
-                    </div>';
+                    </div>
+                </div>
+            </div>
+        </div>';
         }
     }
 
@@ -207,14 +211,24 @@ class Tweet extends User
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    public function getUserTweets($user_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM tweets LEFT JOIN users ON tweetBy = user_id WHERE tweetBy = :user_id AND retweetID = 0 OR retweetBy = :user_id");
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function retweet($tweet_id, $user_id, $get_id, $comment)
     {
-        $stmt = $this->pdo->prepare("UPDATE tweets SET retweetCount = retweetCount + 1 WHERE tweetID = :tweet_id");
+        $stmt = $this->pdo->prepare("UPDATE tweets SET retweetCount = retweetCount + 1 WHERE tweetID = :tweet_id AND tweetBy = :get_id");
         $stmt->bindParam(':tweet_id', $tweet_id, PDO::PARAM_INT);
+        $stmt->bindParam(":get_id", $get_id, PDO::PARAM_INT);
         $stmt->execute();
 
         $stmt = $this->pdo->prepare("INSERT INTO tweets (`status`, tweetBy, tweetImage, retweetID, retweetBy, postedOn, likesCount, retweetCount, retweetMsg)
-                                    SELECT `status`, tweetBy, tweetImage, tweetID, :user_id, CURRENT_TIMESTAMP, likesCount, retweetCount, :retweetMsg 
+                                    SELECT `status`, tweetBy, tweetImage, tweetID, :user_id, postedOn, likesCount, retweetCount, :retweetMsg 
                                     FROM tweets 
                                     WHERE tweetID = :tweet_id");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -243,7 +257,8 @@ class Tweet extends User
         return $stmt->fetchALL(PDO::FETCH_OBJ);
     }
 
-    public function countTweets($user_id){
+    public function countTweets($user_id)
+    {
         $stmt = $this->pdo->prepare("SELECT COUNT(tweetID) AS totalTweets FROM tweets WHERE tweetBy = :user_id AND retweetID = '0' OR retweetBy = :user_id");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -252,7 +267,8 @@ class Tweet extends User
         echo $count->totalTweets;
     }
 
-    public function countLikes($user_id) {
+    public function countLikes($user_id)
+    {
         $stmt = $this->pdo->prepare("SELECT COUNT(likeID) AS totalLikes FROM likes WHERE likeBy = :user_id");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();

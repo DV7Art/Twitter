@@ -20,7 +20,7 @@ if (isset($_POST['tweet'])) {
         if (strlen($status) > 140) {
             $error = "The text of your tweet is too long";
         }
-        $getFromU->create('tweets', array('status' => $status, 'tweetBy' => $user_id, 'tweetImage' => $tweetImage, 'postedOn' => date('Y-m-d H:i:s')));
+        $tweet_id = $getFromU->create('tweets', array('status' => $status, 'tweetBy' => $user_id, 'tweetImage' => $tweetImage, 'postedOn' => date('Y-m-d H:i:s')));
         preg_match_all("/#+([a-zA-Z0-9_]+)/i", $status, $hashtag);
         if (!empty($hashtag)) {
             $getFromT->addTrend($status);
@@ -56,9 +56,12 @@ if (isset($_POST['tweet'])) {
 
                     <div class="nav-left">
                         <ul>
-                            <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-                            <li><a href="i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
-                            <li><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
+                            <li><a href="<?php echo BASE_URL; ?>home.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                            <?php if ($getFromU->loggetIn() === true) { ?>
+                                <li><a href="<?php echo BASE_URL; ?>i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
+                                <li id="messagePopup"><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
+                            <?php } ?>
+
                         </ul>
                     </div>
 
@@ -83,7 +86,7 @@ if (isset($_POST['tweet'])) {
                                     </div>
                                 </div>
                             </li>
-                            <li><label class="addTweetBtn">Tweet</label></li>                            
+                            <li><label class="addTweetBtn">Tweet</label></li>
                         </ul>
                     </div>
 
@@ -127,7 +130,9 @@ if (isset($_POST['tweet'])) {
                                                 <div class="num-head">
                                                     TWEETS
                                                 </div>
-                                                <div class="num-body"> <? $getFromT->countTweets($user_id)?> </div>
+                                                <div class="num-body"> 
+                                                    <? $getFromT->countTweets($user_id) ?> 
+                                                </div>
                                             </div>
                                             <div class="num-box">
                                                 <div class="num-head">
@@ -195,10 +200,8 @@ if (isset($_POST['tweet'])) {
                                     </div>
                                 </div>
                             </div>
-
-                            <!--Tweet SHOW WRAPPER-->
                             <div class="tweets">
-                                <? $getFromT->tweets($user_id) ?>
+                                <? $getFromT->tweets($user_id, 10) ?> <!--10 - limit for displaying tweets -->
                             </div>
 
                             <!--TWEETS SHOW WRAPPER-->
@@ -209,8 +212,10 @@ if (isset($_POST['tweet'])) {
                             <script type="text/javascript" src="assets/js/like.js"></script>
                             <script type="text/javascript" src="assets/js/retweet.js"></script>
                             <script type="text/javascript" src="assets/js/popup.js"></script>
+                            <script type="text/javascript" src="assets/js/comment.js"></script>
                             <script type="text/javascript" src="assets/js/delete.js"></script>
                             <script type="text/javascript" src="assets/js/popupForm.js"></script>
+                            <script type="text/javascript" src="assets/js/fetch.js"></script>
 
                         </div><!-- in left wrap-->
                     </div>

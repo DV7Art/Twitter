@@ -2,13 +2,13 @@ $(function () {
     $(document).on('click', '.retweet', function () {
         $tweet_id = $(this).data('tweet');
         $user_id = $(this).data('user');
-        $counter = $(this).find('.retweetsCounter');
+        $counter = $(this).find('.retweetsCount');
         $count = $counter.text();
         $button = $(this);
 
         $.post('http://twitter/core/ajax/retweet.php', { showPopup: $tweet_id, user_id: $user_id }, function (data) {
-            $('.popupTweet').html(data);
-            $('.close-retweet-popup').click(function () {
+            $('.popupTweet').html(data);                    //home - 208
+            $('.close-retweet-popup').click(function () {   //retweet - 21
                 $('.retweet-popup').hide();
             });
         });

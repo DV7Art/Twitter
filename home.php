@@ -38,7 +38,7 @@ if (isset($_POST['tweet'])) {
 <html>
 
 <head>
-    <title>Tweety</title>
+    <title>Hi, <? echo $user->screenName; ?></title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
     <link rel="stylesheet" href="assets/css/style-complete.css" />
@@ -216,7 +216,6 @@ if (isset($_POST['tweet'])) {
                             <script type="text/javascript" src="assets/js/delete.js"></script>
                             <script type="text/javascript" src="assets/js/popupForm.js"></script>
                             <script type="text/javascript" src="assets/js/fetch.js"></script>
-
                         </div><!-- in left wrap-->
                     </div>
 

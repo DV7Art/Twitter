@@ -16,7 +16,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
 <html>
 
 <head>
-    <title>twitter</title>
+    <title>Tweety - <? echo $profileData->screenName; ?></title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="assets/css/style-complete.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
@@ -123,7 +123,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     </ul>
                     <div class="edit-button">
                         <span>
-                            <button class="f-btn follow-btn"><i class="fa fa-user-plus"></i>Follow</button>
+                            <? $getFromF->followBtn($profileId, $user_id)?>
                         </span>
                     </div>
                 </div>
@@ -354,15 +354,16 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                         ?>
                     </div><!-- in left wrap-->
                     <div class="popupTweet"></div>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/comment.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/fetch.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
-                    <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/comment.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/fetch.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+                    <script src="<?php echo BASE_URL; ?>assets/js/follow.js"></script>
 
                     <div class="in-right">
                         <div class="in-right-wrap">

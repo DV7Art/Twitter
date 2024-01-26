@@ -37,7 +37,7 @@ $(function () {
                     $('<div class="error-banner"><div class="error-banner-inner"><p id="errorMsg">' + result.success + '</p></div></div>').insertBefore('.header-wrapper');
                     $('.error-banner').hide().slideDown(300).delay(5000).slideUp(300);
                     $('.popup-tweet-wrap').hide();
-                    //location.reload();
+                    
                 }
                 
             },
@@ -46,6 +46,7 @@ $(function () {
             processData: false
             
         });
+        
         
         /**
         Цей блок коду використовує метод $.ajax для відправлення асинхронного HTTP-запиту на сервер. 
@@ -57,4 +58,5 @@ $(function () {
         contentType: Вказує тип вмісту запиту. У цьому випадку встановлено значення false, оскільки contentType не обробляється (використовується FormData, який автоматично встановлює відповідний тип вмісту для форми, що містить файли).
         processData: Вказує, чи обробляти дані перед відправленням запиту. У цьому випадку встановлено значення false, оскільки обробка даних не потрібна при використанні FormData. */
     });
+   
 });

@@ -23,7 +23,7 @@ class Tweet extends User
             echo '<div class="all-tweet">
                      <div class="t-show-wrap">   
                         <div class="t-show-inner">  
-                        '.((!empty($retweet['retweetID']) ? $retweet['retweetID'] === $tweet->retweetID OR $tweet->retweetID > 0 : '') ? '                
+                        ' . ((!empty($retweet['retweetID']) ? $retweet['retweetID'] === $tweet->retweetID or $tweet->retweetID > 0 : '') ? '                
                         
                             <div class="t-show-banner">
                                 <div class="t-show-banner-inner">
@@ -31,7 +31,7 @@ class Tweet extends User
                                 </div>
                             </div>' : '') . '
                             
-                            '.((!empty($tweet->retweetMsg) && $tweet->tweetID === isset($retweet['tweetID']) or $tweet->retweetID > 0) ? '<div class="t-show-head">
+                            ' . ((!empty($tweet->retweetMsg) && $tweet->tweetID === isset($retweet['tweetID']) or $tweet->retweetID > 0) ? '<div class="t-show-head">
                             <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">        
                                 <div class="t-show-head">
                                     <div class="t-show-img">
@@ -41,7 +41,7 @@ class Tweet extends User
                                         <div class="t-h-c-name">
                                             <span><a href="' . BASE_URL . $user->username . '">' . $user->screenName . '</a></span>
                                             <span>@' . $user->username . '</span>
-                                            <span>'.$this->timeAgo($tweet->postedOn).'</span>
+                                            <span>' . $this->timeAgo($tweet->postedOn) . '</span>
                                         </div>
                                         <div class="t-h-c-dis">
                                             ' . $this->getTweetLinks($tweet->retweetMsg) . '
@@ -86,7 +86,7 @@ class Tweet extends User
                                                 </div>
                                             </div>
                                         </div>' .
-                                        ((!empty($tweet->tweetImage)) ? '
+                ((!empty($tweet->tweetImage)) ? '
                                             <!--tweet show head end-->
                                                 <div class="t-show-body">
                                                 <div class="t-s-b-inner">
@@ -101,10 +101,10 @@ class Tweet extends User
                         <div class="t-s-f-right">
                             <ul> 
                                 <li><button><a href="#"><i class="fa fa-share" aria-hidden="true"></i></a></button></li>    
-                                <li>'.((!empty($retweet['retweetID']) ? $tweet->tweetID === $retweet['retweetID'] : '') ?  '
+                                <li>' . ((!empty($retweet['retweetID']) ? $tweet->tweetID === $retweet['retweetID'] : '') ?  '
                                     <button class="retweeted" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . $tweet->retweetCount . '</span></button>' : '
                                     <button class="retweet" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a><span class="retweetsCounter">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>') . '</li>
-                                    <li>'.((!empty($likes['likeOn']) ? $likes['likeOn'] === $tweet->tweetID : '') ?  '
+                                    <li>' . ((!empty($likes['likeOn']) ? $likes['likeOn'] === $tweet->tweetID : '') ?  '
                                     <button class="unlike-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart" aria-hidden="true"></i><span class="likesCounter">' . $tweet->likesCount . '</span></button>' : '
                                     <button class="like-btn" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-heart-o" aria-hidden="true"></i><span class="likesCounter">' . (($tweet->likesCount > 0) ? $tweet->likesCount : '') . '</span></button>') . '</li>
                                 ' . (($tweet->tweetBy === $user_id) ? '

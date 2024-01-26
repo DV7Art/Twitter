@@ -123,7 +123,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     </ul>
                     <div class="edit-button">
                         <span>
-                            <? $getFromF->followBtn($profileId, $user_id)?>
+                            <? $getFromF->followBtn($profileId, $user_id) ?>
                         </span>
                     </div>
                 </div>
@@ -243,7 +243,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                             echo '<div class="all-tweet">
                                 <div class="t-show-wrap">
                                 <div class="t-show-inner">
-                                '.((isset($retweet['retweetID']) ? $retweet['retweetID'] === $tweet->retweetID OR $tweet->retweetID > 0 : '') ? '
+                                ' . ((isset($retweet['retweetID']) ? $retweet['retweetID'] === $tweet->retweetID or $tweet->retweetID > 0 : '') ? '
                                 <div class="t-show-banner">
                                     <div class="t-show-banner-inner">
                                     <span><i class="fa fa-retweet" aria-hidden="true"></i></span><span>' . $user->screenName . ' Retweeted</span>
@@ -251,7 +251,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                 </div>'
                                 : '') . '
 
-                                '.((!empty($tweet->retweetMsg) && $tweet->tweetID === isset($retweet['tweetID']) or $tweet->retweetID > 0) ? '<div class="t-show-head">
+                                ' . ((!empty($tweet->retweetMsg) && $tweet->tweetID === isset($retweet['tweetID']) or $tweet->retweetID > 0) ? '<div class="t-show-head">
                                 <div class="t-show-popup" data-tweet="' . $tweet->tweetID . '">
                                     <div class="t-show-img">
                                     <img src="' . BASE_URL . $user->profileImage . '"/>
@@ -324,7 +324,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                                     ' . (($getFromU->loggetIn() === true) ? '
                                         <li><button><i class="fa fa-share" aria-hidden="true"></i></button></li>
                                         <li>' . (((!empty($retweet['retweetID'])) ? $tweet->tweetID === $retweet['retweetID'] or $user_id == $retweet['retweetBy'] : '') ? '
-                                            <button class="retweeted" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-retweet" aria-hidden="true"></i><span class="retweetsCount">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>' :'
+                                            <button class="retweeted" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-retweet" aria-hidden="true"></i><span class="retweetsCount">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>' : '
                                             <button class="retweet" data-tweet="' . $tweet->tweetID . '" data-user="' . $tweet->tweetBy . '"><i class="fa fa-retweet" aria-hidden="true"></i><span class="retweetsCount">' . (($tweet->retweetCount > 0) ? $tweet->retweetCount : '') . '</span></button>') . '</li>
                                     
                                         <li>' . (((!empty($likes['likeOn'])) ? $likes['likeOn'] === $tweet->tweetID : '') ?  '

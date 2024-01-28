@@ -233,8 +233,15 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                        test                     
                     </div><!-- wrap follo inner end-->
                 </div><!--FOLLOWING OR FOLLOWER FULL WRAPPER END-->
-                <script src="<? echo BASE_URL?>/assets/js/follow.js"></script>
-
+                <script src="<? echo BASE_URL ?>/assets/js/follow.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/messages.js"></script>
             </div><!--in full wrap end-->
         </div>
 

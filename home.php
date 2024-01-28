@@ -209,13 +209,14 @@ if (isset($_POST['tweet'])) {
                                 <img id="loader" src="assets/images/loading.svg" style="display: none;" />
                             </div>
                             <div class="popupTweet"></div>
-                            <script type="text/javascript" src="assets/js/like.js"></script>
-                            <script type="text/javascript" src="assets/js/retweet.js"></script>
-                            <script type="text/javascript" src="assets/js/popup.js"></script>
-                            <script type="text/javascript" src="assets/js/comment.js"></script>
-                            <script type="text/javascript" src="assets/js/delete.js"></script>
-                            <script type="text/javascript" src="assets/js/popupForm.js"></script>
-                            <script type="text/javascript" src="assets/js/fetch.js"></script>
+                            <script src="assets/js/like.js"></script>
+                            <script src="assets/js/retweet.js"></script>
+                            <script src="assets/js/popup.js"></script>
+                            <script src="assets/js/comment.js"></script>
+                            <script src="assets/js/delete.js"></script>
+                            <script src="assets/js/popupForm.js"></script>
+                            <script src="assets/js/fetch.js"></script>
+                            <script src="assets/js/messages.js"></script>
                         	</div><!-- in left wrap-->
 		</div><!-- in center end -->
 

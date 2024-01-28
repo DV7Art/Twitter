@@ -84,7 +84,11 @@ if (isset($_POST['submit'])) {
 
 
                 </div>
-
+                <script src="assets/js/popupForm.js"></script>
+                <script src="assets/js/search.js"></script>
+                <script src="assets/js/hashtag.js"></script>
+                <script src="assets/js/delete.js"></script>
+                <script src="assets/js/messages.js"></script>
             </div>
         </div>
         <div class="container-wrap">
@@ -214,11 +218,14 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </div>
+        <!--RIGHTER ENDS-->
+        <div class="popupTweet"></div>
+        <script src="assets/js/postMessage.js"></script>
 
     </div>
-
+    <!--CONTAINER_WRAP ENDS-->
     </div>
-
+    <!-- ends wrapper -->
 </body>
 
 </html>

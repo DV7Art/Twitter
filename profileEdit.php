@@ -69,9 +69,9 @@ if (isset($_FILES['profileCover'])) {
                 <div class="nav">
                     <div class="nav-left">
                         <ul>
-                            <li><a href="home.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
                             <li><a href="i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
-                            <l><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
                         </ul>
                     </div>
                     <!-- nav left ends-->
@@ -82,24 +82,28 @@ if (isset($_FILES['profileCover'])) {
 
                                 </div>
                             </li>
-                            <li class="hover"><label class="drop-label" for="drop-wrap1"><img src="<?php echo $user->profileImage ?>" /></label>
+                            <li class="hover"><label class="drop-label" for="drop-wrap1"><img src="<?php echo $user->profileImage; ?>" /></label>
                                 <input type="checkbox" id="drop-wrap1">
                                 <div class="drop-wrap">
                                     <div class="drop-inner">
                                         <ul>
-                                            <li><a href="<?php echo $user->username ?>"><?php echo $user->username ?></a></li>
+                                            <li><a href="<?php echo $user->username; ?>"><?php echo $user->username; ?></a></li>
                                             <li><a href="settings/account">Settings</a></li>
                                             <li><a href="includes/logout.php">Log out</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li><label for="pop-up-tweet" class="addTweetBtn">Tweet</label></li>
+                            <li><label for="pop-up-tweet">Tweet</label></li>
                         </ul>
                     </div>
+                    <!-- nav right ends-->
                 </div>
+                <!-- nav ends -->
             </div>
+            <!-- nav container ends -->
         </div>
+        <!-- header wrapper end -->
 
         <!--Profile cover-->
         <div class="profile-cover-wrap">
@@ -434,24 +438,41 @@ if (isset($_FILES['profileCover'])) {
                 }
                 ?>
             </div>
-
+            <!-- in left wrap-->
             <div class="popupTweet"></div>
-<!-- SCRIPTS -->
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/popup.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/delete.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/popupForm.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/retweet.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/like.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/hashtag.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/search.js"></script>
-<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/follow.js"></script>
-            </div>
-   <!--in full wrap end-->
- 
-  </div>
-  <!-- in wrappper ends-->
+        </div>
+        <!-- in center end -->
 
-</div>
-<!-- ends wrapper -->
+        <!-- Who to Follow & Trends Section -->
+        <div class="in-right">
+            <div class="in-right-wrap">
+                <?php $getFromF->whoToFollow($user_id, $user_id); ?>
+
+            </div>
+            <!-- in left wrap-->
+        </div>
+        <!-- in right end -->
+
+        <!-- SCRIPTS -->
+        <script src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/follow.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/js/messages.js"></script>
+
+
+    </div>
+    <!--in full wrap end-->
+
+    </div>
+    <!-- in wrappper ends-->
+
+    </div>
+    <!-- ends wrapper -->
 </body>
+
 </html>

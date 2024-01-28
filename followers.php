@@ -120,7 +120,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     </ul>
                     <div class="edit-button">
                         <span>
-                            <?php echo $getFromF->followBtn($profileId, $user_id, $profileData->user_id); ?>                            
+                            <?php echo $getFromF->followBtn($profileId, $user_id, $profileData->user_id); ?>
                         </span>
                     </div>
                 </div>
@@ -220,28 +220,35 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                             </div>
                             <!--PROFILE INFO INNER END-->
 
-	</div>
-	<!--PROFILE INFO WRAPPER END-->
+                        </div>
+                        <!--PROFILE INFO WRAPPER END-->
 
-	<div class="popupTweet"></div>
-	</div>
-	<!-- in left wrap-->
-</div>
-<!-- in left end-->
-		<!--FOLLOWING OR FOLLOWER FULL WRAPPER-->
-		<div class="wrapper-following">
-			<div class="wrap-follow-inner">
-              <? $getFromF->followersList($profileId,$user_id, $profileData->user_id)?>
-              test
-			</div>
-		<!-- wrap follo inner end-->
-		</div>
-		<!--FOLLOWING OR FOLLOWER FULL WRAPPER END-->	
-        <script src="<? echo BASE_URL?>/assets/js/follow.js"></script>
-	</div><!--in full wrap end-->
-</div>
-<!-- in wrappper ends-->
-</div><!-- ends wrapper -->
+                        <div class="popupTweet"></div>
+                    </div>
+                    <!-- in left wrap-->
+                </div>
+                <!-- in left end-->
+                <!--FOLLOWING OR FOLLOWER FULL WRAPPER-->
+                <div class="wrapper-following">
+                    <div class="wrap-follow-inner">
+                        <? $getFromF->followersList($profileId, $user_id, $profileData->user_id) ?>
+                        test
+                    </div>
+                    <!-- wrap follo inner end-->
+                </div>
+                <script src="<? echo BASE_URL ?>/assets/js/follow.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/messages.js"></script>
+            </div><!--in full wrap end-->
+        </div>
+        <!-- in wrappper ends-->
+    </div><!-- ends wrapper -->
 </body>
 
 </html>

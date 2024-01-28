@@ -353,15 +353,16 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                         ?>
                     </div><!-- in left wrap-->
                     <div class="popupTweet"></div>
-                    <script src="<?php echo BASE_URL; ?>assets/js/like.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/retweet.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/popup.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/delete.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/comment.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/popupForm.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/fetch.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
+                    <script src="assets/js/like.js"></script>
+                    <script src="assets/js/retweet.js"></script>
+                    <script src="assets/js/popup.js"></script>
+                    <script src="assets/js/delete.js"></script>
+                    <script src="assets/js/comment.js"></script>
+                    <script src="assets/js/popupForm.js"></script>
+                    <script src="assets/js/fetch.js"></script>
+                    <script src="assets/js/search.js"></script>
+                    <script src="assets/js/hashtag.js"></script>
+                    <script src="assets/js/messages.js"></script>
 
                 </div>
                 <!-- in center end -->
@@ -372,9 +373,9 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                         <!--==WHO TO FOLLOW==-->
                         <?php $getFromF->whoToFollow($user_id, $profileId); ?>
                         <!--==WHO TO FOLLOW==-->
-                        
+
                         <!--==TRENDS==-->
-                        <!-- HERE -->
+                      
                         <!--==TRENDS==-->
 
                     </div><!-- in right wrap-->

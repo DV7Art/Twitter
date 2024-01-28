@@ -28,7 +28,7 @@ class User
 
     public function register($email, $screenName, $password)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO `users` (`email`,`password`,`screenName`,`profileImage`, `profileCover`) 
+        $stmt = $this->pdo->prepare("INSERT INTO users (email,password,screenName,profileImage, profileCover) 
                                         VALUES (:email,:password,:screenName, 'assets/images/defaultProfileImage.png', 'assets/images/defaultCoverImage.png')");
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":screenName", $screenName, PDO::PARAM_STR);
@@ -41,7 +41,7 @@ class User
 
     public function login($email, $password)
     {
-        $stmt = $this->pdo->prepare("SELECT `user_id` FROM `users` WHERE `email` = :email AND `password` = :password");
+        $stmt = $this->pdo->prepare("SELECT user_id FROM users WHERE email = :email AND password = :password");
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":password", md5($password), PDO::PARAM_STR);
         $stmt->execute();
@@ -95,13 +95,13 @@ class User
         $columns = '';
         $i = 1;
         foreach ($fields as $name => $value) {
-            $columns .= "`{$name}` = :{$name}";
+            $columns .= "{$name} = :{$name}";
             if ($i < count($fields)) {
                 $columns .= ', ';
             }
             $i++;
         }
-        $sql = "UPDATE {$table} SET {$columns} WHERE `user_id` = {$user_id}";
+        $sql = "UPDATE {$table} SET {$columns} WHERE user_id = {$user_id}";
         if ($stmt = $this->pdo->prepare($sql)) {
             foreach ($fields as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
@@ -150,7 +150,7 @@ class User
 
     public function checkPassword($password)
     {
-        $stmt = $this->pdo->prepare("SELECT `password` FROM users WHERE `password` = :password");
+        $stmt = $this->pdo->prepare("SELECT password FROM users WHERE password = :password");
         $stmt->bindParam(":password", md5($password), PDO::PARAM_STR);
         $stmt->execute();
 
@@ -213,9 +213,9 @@ class User
             }
         } else if ($minutes <= 60) {
             return $minutes . "m";
-        } else if($hours <= 24){
-            return $hours."h";
-        }else if($months <= 12){
+        } else if ($hours <= 24) {
+            return $hours . "h";
+        } else if ($months <= 12) {
             return date('M j', $time);
         } else {
             return date('j M Y', $time);

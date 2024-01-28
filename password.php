@@ -16,15 +16,15 @@ if (isset($_POST['submit'])) {
         if ($getFromU->checkPassword($currentPwd) === true) {
             if (strlen($newPassword) < 6) {
                 $error['newPassword'] = "Password is too short!";
-            }elseif($newPassword != $rePassword){
+            } elseif ($newPassword != $rePassword) {
                 $error['rePassword'] = "Password doesn`t match!";
-            }else{
-                $getFromU->update('users',$user_id, array('password'=>md5($newPassword)));
-                header("Location:".BASE_URL.$user->username);
+            } else {
+                $getFromU->update('users', $user_id, array('password' => md5($newPassword)));
+                header("Location:" . BASE_URL . $user->username);
                 exit;
             }
-        }else{
-           $error['currentPwd'] = "Password is incorrect!"; 
+        } else {
+            $error['currentPwd'] = "Password is incorrect!";
         }
     } else {
         $error['fields'] = "All fields are required!";
@@ -147,7 +147,9 @@ if (isset($_POST['submit'])) {
                                         <input type="password" name="currentPwd" />
                                         <span>
                                             <!-- Current Pwd Error -->
-                                            <? if(isset($error['currentPwd'])){echo $error['currentPwd'];}?>
+                                            <? if (isset($error['currentPwd'])) {
+                                                echo $error['currentPwd'];
+                                            } ?>
                                         </span>
                                     </div>
                                 </div>
@@ -160,7 +162,9 @@ if (isset($_POST['submit'])) {
                                         <input type="password" name="newPassword" />
                                         <span>
                                             <!-- NewPassword Error -->
-                                            <? if(isset($error['newPassword'])){echo $error['newPassword'];}?>
+                                            <? if (isset($error['newPassword'])) {
+                                                echo $error['newPassword'];
+                                            } ?>
                                         </span>
                                     </div>
                                 </div>
@@ -173,7 +177,9 @@ if (isset($_POST['submit'])) {
                                         <input type="password" name="rePassword" />
                                         <span>
                                             <!-- RePassword Error -->
-                                            <? if(isset($error['rePassword'])){echo $error['rePassword'];}?>
+                                            <? if (isset($error['rePassword'])) {
+                                                echo $error['rePassword'];
+                                            } ?>
                                         </span>
                                     </div>
                                 </div>
@@ -185,7 +191,9 @@ if (isset($_POST['submit'])) {
                                     </div>
                                     <div class="settings-error">
                                         <!-- Fields Error -->
-                                        <? if(isset($error['fields'])){echo $error['fields'];}?>
+                                        <? if (isset($error['fields'])) {
+                                            echo $error['fields'];
+                                        } ?>
                                     </div>
                                 </div>
                         </form>

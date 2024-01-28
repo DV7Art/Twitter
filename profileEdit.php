@@ -436,31 +436,22 @@ if (isset($_FILES['profileCover'])) {
             </div>
 
             <div class="popupTweet"></div>
-            <script src="<? echo BASE_URL ?>assets/js/like.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/retweet.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/popup.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/delete.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/popupForm.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/hashtag.js"></script>
-            <script src="<? echo BASE_URL ?>assets/js/search.js"></script>
-        </div>
-
-
-        <div class="in-right">
-            <div class="in-right-wrap">
-
+<!-- SCRIPTS -->
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/popup.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/delete.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/popupForm.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/retweet.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/like.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/hashtag.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/search.js"></script>
+<script type="text/javascript" src="<?php echo BASE_URL;?>assets/js/follow.js"></script>
             </div>
+   <!--in full wrap end-->
+ 
+  </div>
+  <!-- in wrappper ends-->
 
-        </div>
-
-    </div>
-
-
-    </div>
-
-
-    </div>
-
+</div>
+<!-- ends wrapper -->
 </body>
-
 </html>

@@ -18,7 +18,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
 <head>
     <title>Tweety - <? echo $profileData->screenName; ?></title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="<? echo BASE_URL?>assets/css/style-complete.css"/>
+    <link rel="stylesheet" href="<? echo BASE_URL ?>assets/css/style-complete.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
@@ -362,24 +362,32 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     <script src="<?php echo BASE_URL; ?>assets/js/fetch.js"></script>
                     <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
                     <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
-                    <script src="<?php echo BASE_URL; ?>assets/js/follow.js"></script>
 
-                    <div class="in-right">
-                        <div class="in-right-wrap">
-
-                            <!--==WHO TO FOLLOW==-->
-                            <!--who to follow-->
-                            <!--==WHO TO FOLLOW==-->
-
-                            <!--==TRENDS==-->
-                            <!--Trends-->
-                            <!--==TRENDS==-->
-
-                        </div>
-                    </div>
                 </div>
+                <!-- in center end -->
+
+                <div class="in-right">
+                    <div class="in-right-wrap">
+
+                        <!--==WHO TO FOLLOW==-->
+                        <?php $getFromF->whoToFollow($user_id, $profileId); ?>
+                        <!--==WHO TO FOLLOW==-->
+                        
+                        <!--==TRENDS==-->
+                        <!-- HERE -->
+                        <!--==TRENDS==-->
+
+                    </div><!-- in right wrap-->
+                </div>
+                <!-- in right end -->
+                <script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/follow.js"></script>
+
             </div>
+            <!--in full wrap end-->
         </div>
+        <!-- in wrappper ends-->
+    </div>
+    <!-- ends wrapper -->
 </body>
 
 </html>

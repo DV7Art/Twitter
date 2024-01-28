@@ -42,7 +42,7 @@ class Follow extends User
     {
         $this->create('follow', array('sender' => $user_id, 'receiver' => $followID, 'followOn' => date("Y:m:d H:i:s")));
         $this->addFollowCount($followID, $user_id);
-        $stmt = $this->pdo->prepare("SELECT user_id, `following`, followers FROM users LEFT JOIN follow ON sender = :user_id AND CASE WHEN receiver = :user_id THEN sender = user_id END WHERE user_id = :profileID");
+        $stmt = $this->pdo->prepare("SELECT user_id, following, followers FROM users LEFT JOIN follow ON sender = :user_id AND CASE WHEN receiver = :user_id THEN sender = user_id END WHERE user_id = :profileID");
         $stmt->execute(array("user_id" => $user_id, "profileID" => $profileID));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         echo json_encode($data);
@@ -50,7 +50,7 @@ class Follow extends User
 
     public function addFollowCount($followID, $user_id)
     {
-        $stmt = $this->pdo->prepare("UPDATE users SET `following` = `following` + 1 WHERE user_id = :user_id; UPDATE users SET followers = followers + 1 WHERE user_id = :followID");
+        $stmt = $this->pdo->prepare("UPDATE users SET following = following + 1 WHERE user_id = :user_id; UPDATE users SET followers = followers + 1 WHERE user_id = :followID");
         $stmt->execute(array("user_id" => $user_id, "followID" => $followID));
     }
 
@@ -58,7 +58,7 @@ class Follow extends User
     {
         $this->delete('follow', array('sender' => $user_id, 'receiver' => $followID));
         $this->removeFollowCount($followID, $user_id);
-        $stmt = $this->pdo->prepare("SELECT user_id, `following`, followers FROM users LEFT JOIN follow ON sender = :user_id AND CASE WHEN receiver = :user_id THEN sender = user_id END WHERE user_id = :profileID");
+        $stmt = $this->pdo->prepare("SELECT user_id, following, followers FROM users LEFT JOIN follow ON sender = :user_id AND CASE WHEN receiver = :user_id THEN sender = user_id END WHERE user_id = :profileID");
         $stmt->execute(array("user_id" => $user_id, "profileID" => $profileID));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         echo json_encode($data);
@@ -66,13 +66,13 @@ class Follow extends User
 
     public function removeFollowCount($followID, $user_id)
     {
-        $stmt = $this->pdo->prepare("UPDATE users SET `following` = `following` - 1 WHERE user_id = :user_id; UPDATE users SET followers = followers - 1 WHERE user_id = :followID");
+        $stmt = $this->pdo->prepare("UPDATE users SET following = following - 1 WHERE user_id = :user_id; UPDATE users SET followers = followers - 1 WHERE user_id = :followID");
         $stmt->execute(array("user_id" => $user_id, "followID" => $followID));
     }
 
     public function followingList($profileID, $user_id, $followID)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM `users` LEFT JOIN follow ON receiver = user_id AND CASE WHEN sender = :profileID THEN receiver = user_id END WHERE sender IS NOT NULL ");
+        $stmt = $this->pdo->prepare("SELECT * FROM users LEFT JOIN follow ON receiver = user_id AND CASE WHEN sender = :profileID THEN receiver = user_id END WHERE sender IS NOT NULL ");
         $stmt->bindParam(":profileID", $profileID, PDO::PARAM_INT);
         $stmt->execute();
         $followings = $stmt->fetchAll(PDO::FETCH_OBJ);

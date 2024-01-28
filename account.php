@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/style-complete.css" />
+    <link rel="stylesheet" href="<? echo BASE_URL ?>assets/css/style-complete.css" />
 </head>
 
 <body>
@@ -53,8 +53,8 @@ if (isset($_POST['submit'])) {
                 <div class="nav">
                     <div class="nav-left">
                         <ul>
-                            <li><a href="<?php echo BASE_URL ?>home.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-                            <li><a href="<?php echo BASE_URL ?>i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
+                            <li><a href="<? echo BASE_URL ?>home.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                            <li><a href="<? echo BASE_URL ?>i/notifications"><i class="fa fa-bell" aria-hidden="true"></i>Notification</a></li>
                             <li id="messagePopup" rel="user_id"><i class="fa fa-envelope" aria-hidden="true"></i>Messages</li>
                         </ul>
                     </div>
@@ -97,15 +97,15 @@ if (isset($_POST['submit'])) {
                     <div class="acc-info-wrap">
                         <div class="acc-info-bg">
                             <!-- PROFILE-COVER -->
-                            <img src="<?php echo BASE_URL . $user->profileCover ?>" />
+                            <img src="<? echo BASE_URL . $user->profileCover ?>" />
                         </div>
                         <div class="acc-info-img">
                             <!-- PROFILE-IMAGE -->
-                            <img src="<?php echo BASE_URL . $user->profileImage ?>" />
+                            <img src="<? echo BASE_URL . $user->profileImage ?>" />
                         </div>
                         <div class="acc-info-name">
                             <h3><?php echo $user->screenName ?></h3>
-                            <span><a href="<?php echo BASE_URL . $user->username ?>">@<?php echo $user->username ?></a></span>
+                            <span><a href="<? echo BASE_URL . $user->username ?>">@<? echo $user->username ?></a></span>
                         </div>
                     </div>
                     <div class="option-box">
@@ -146,10 +146,10 @@ if (isset($_POST['submit'])) {
                                         Username
                                     </div>
                                     <div class="acc-right">
-                                        <input type="text" name="username" value="<?php echo $user->username ?>" />
+                                        <input type="text" name="username" value="<? echo $user->username ?>" />
                                         <span>
                                             <!-- Username Error -->
-                                            <?php if(isset($error['username'])){echo $error['username'];}?>
+                                            <? if(isset($error['username'])){echo $error['username'];}?>
                                         </span>
                                     </div>
                                 </div>
@@ -159,10 +159,10 @@ if (isset($_POST['submit'])) {
                                         Email
                                     </div>
                                     <div class="acc-right">
-                                        <input type="text" name="email" value="<?php echo $user->email ?>" />
+                                        <input type="text" name="email" value="<? echo $user->email ?>" />
                                         <span>
                                             <!-- Email Error -->
-                                            <?php if(isset($error['email'])){echo $error['email'];}?>
+                                            <? if(isset($error['email'])){echo $error['email'];}?>
                                         </span>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@ if (isset($_POST['submit'])) {
                                     </div>
                                     <div class="settings-error">
                                         <!-- Fields Error -->
-                                        <?php if(isset($error['fields'])){echo $error['fields'];}?>
+                                        <? if(isset($error['fields'])){echo $error['fields'];}?>
                                     </div>
                                 </div>
                             </form>

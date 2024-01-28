@@ -216,19 +216,24 @@ if (isset($_POST['tweet'])) {
                             <script type="text/javascript" src="assets/js/delete.js"></script>
                             <script type="text/javascript" src="assets/js/popupForm.js"></script>
                             <script type="text/javascript" src="assets/js/fetch.js"></script>
-                        </div><!-- in left wrap-->
-                    </div>
+                        	</div><!-- in left wrap-->
+		</div><!-- in center end -->
 
-                    <div class="in-right">
-                        <div class="in-right-wrap">
-                        </div>
+		<div class="in-right">
+			<div class="in-right-wrap">
 
-                    </div>
+		 	<!--Who To Follow-->
+		 	 <?php $getFromF->whoToFollow($user_id, $user_id); ?>
+      		<!--Who To Follow-->
 
-                </div>
-            </div>
-        </div>
-    </div>
+ 			</div><!-- in left wrap-->
+ 			 <script type="text/javascript" src="assets/js/follow.js"></script>
+		</div><!-- in right end -->
+
+	</div><!--in full wrap end-->
+ </div><!-- in wrappper ends-->
+</div><!-- inner wrapper ends-->
+</div><!-- ends wrapper -->
 </body>
 
 </html>

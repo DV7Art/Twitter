@@ -1,6 +1,12 @@
 <?php
 include '../init.php';
 
+if(isset($_POST['deleteMsg']) && !empty($_POST['deleteMsg'])){
+    $user_id   = $_SESSION['user_id'];
+    $messageID = $_POST['deleteMsg'];
+    $getFromM->deleteMsg($messageID, $user_id); 
+}
+
 if(isset($_POST['sendMessage']) && !empty($_POST['sendMessage'])){
     $user_id  = $_SESSION['user_id'];
     $message  = $getFromU->checkInput($_POST['sendMessage']);

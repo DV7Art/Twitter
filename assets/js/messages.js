@@ -61,5 +61,19 @@ $(function () {
                 clearInterval(timer);
             });
         });
+
+        $(document).on('click', '.deleteMsg', function () {//message - 35
+            var messageID = $(this).data('message');
+            $('.message-del-inner').height('100px')     //messages - 147
+            $(document).on('click', '.cancel', function () {
+                $('.message-del-inner').height('0px')
+            })
+            $(document).on('click', '.delete', function () {
+                $.post('http://twitter/core/ajax/messages.php', { deleteMsg: messageID }, function (data) {
+                    $('.message-del-inner').height('0px')
+                    getMessages();
+                })
+            })
+        })
     })
 })

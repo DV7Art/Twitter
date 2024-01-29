@@ -31,7 +31,7 @@
                 </div>
                 <div class="msg-btn">
                   <a><i class="fa fa-ban" aria-hidden="true"></i></a>
-                  <a class="deleteMsg" data-user="'.$message->user_id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a class="deleteMsg" data-message="'.$message->messageID.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
               </div>
             </div>';
@@ -48,11 +48,18 @@
               </div>
               <div class="msg-btn-l">
                 <a><i class="fa fa-ban" aria-hidden="true"></i></a>
-                <a class="deleteMsg" data-user="'.$message->user_id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a class="deleteMsg" data-message="'.$message->messageID.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
               </div>
             </div>
           </div> ';
         }
       }
+    }
+
+    public function deleteMsg($messageID, $user_id){
+      $stmt = $this->pdo->prepare("DELETE FROM messages WHERE messageID =:messageID AND messageFrom =:user_id OR messageID =:messageID AND messageTo =:user_id");
+      $stmt->bindParam(":messageID", $messageID, PDO::PARAM_INT);
+      $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+      $stmt->execute();
     }
   }

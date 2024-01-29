@@ -245,6 +245,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                 <script src="<?php echo BASE_URL; ?>assets/js/search.js"></script>
                 <script src="<?php echo BASE_URL; ?>assets/js/hashtag.js"></script>
                 <script src="<?php echo BASE_URL; ?>assets/js/messages.js"></script>
+                <script src="<?php echo BASE_URL; ?>assets/js/postMessage.js"></script>
             </div><!--in full wrap end-->
         </div>
         <!-- in wrappper ends-->

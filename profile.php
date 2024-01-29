@@ -363,6 +363,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                     <script src="assets/js/search.js"></script>
                     <script src="assets/js/hashtag.js"></script>
                     <script src="assets/js/messages.js"></script>
+                    <script src="assets/js/postMessage.js"></script>
 
                 </div>
                 <!-- in center end -->
@@ -375,7 +376,7 @@ if (isset($_GET['username']) && !empty($_GET['username'])) {
                         <!--==WHO TO FOLLOW==-->
 
                         <!--==TRENDS==-->
-                      
+
                         <!--==TRENDS==-->
 
                     </div><!-- in right wrap-->

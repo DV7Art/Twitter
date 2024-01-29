@@ -217,6 +217,7 @@ if (isset($_POST['tweet'])) {
                             <script src="assets/js/popupForm.js"></script>
                             <script src="assets/js/fetch.js"></script>
                             <script src="assets/js/messages.js"></script>
+                            <script src="assets/js/postMessage.js"></script>
                         	</div><!-- in left wrap-->
 		</div><!-- in center end -->
 

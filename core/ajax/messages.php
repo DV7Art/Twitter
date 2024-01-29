@@ -1,6 +1,16 @@
 <?php
 include '../init.php';
 
+if(isset($_POST['sendMessage']) && !empty($_POST['sendMessage'])){
+    $user_id  = $_SESSION['user_id'];
+    $message  = $getFromU->checkInput($_POST['sendMessage']);
+    $get_id   = $_POST['get_id'];
+    if(!empty($message)){
+        $getFromU->create('messages', array('messageTo' => $get_id, 'messageFrom' => $user_id, 'message' => $message, 'messageOn' => date('Y-m-d H:i:s')));
+
+    }
+}
+
 if (isset($_POST['showChatMessage']) && !empty($_POST['showChatMessage'])) {
     $user_id = $_SESSION['user_id'];
     $messageFrom = $_POST['showChatMessage'];

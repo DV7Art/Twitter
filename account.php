@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
             $error['email'] = "Email already used!";
         }else {
             $getFromU->update('users',$user_id,array('username'=>$username,'email'=>$email));
-            header("Location:".BASE_URL."setting/account");
+            header("Location:".BASE_URL."settings/account");
             exit;
         }
     } else {

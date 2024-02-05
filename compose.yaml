@@ -11,7 +11,7 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
+      MYSQL_DATABASE: tweety
       MYSQL_USER: roots
       MYSQL_PASSWORD: root
     ports:

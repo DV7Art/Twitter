@@ -48,5 +48,9 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Включіть модуль mod_rewrite
 RUN a2enmod rewrite
 
+# Встановіть драйвер PDO для MySQL
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Switch to a non-privileged user (defined in the base image) that the app will run under.
 USER www-data
+
